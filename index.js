@@ -42,10 +42,10 @@ app.post("/api/v1/nodemailer", async (req, res) => {
 
     // Preview only available when sending through an Ethereal account
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    res.send("Email sent successfully");
+    res.json({message: "Email sent successfully"});
   } catch (error) {
     console.log(error);
-    res.send("Email not sent");
+    res.json({message: "Email not sent"});
   }
 });
 
