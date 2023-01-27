@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 
 app.post("/api/v1/nodemailer", async (req, res) => {
   try {
-    const { name, email, subject, description } = req.body;
+    const { name, email, subject, description, to } = req.body;
     console.log({data: req})
     let transporter = nodemailer.createTransport({
       host: "smtp.hostinger.com",
@@ -36,7 +36,7 @@ app.post("/api/v1/nodemailer", async (req, res) => {
     });
     let info = await transporter.sendMail({
       from: '"Fantasy Cottage" <info@oxbit.io>', // sender address
-      to: "muneebahmedayub01@gmail.com", // list of receivers
+      to: to, // list of receivers
       subject: subject, // Subject line
       text: description, // plain text body
       html: `<b>Hi, I am ${name} and my email is ${email}.<br/>${description}</b>`, // html body
