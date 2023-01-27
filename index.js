@@ -2,6 +2,7 @@ import express from "express";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 dotenv.config();
 
@@ -9,7 +10,8 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -19,6 +21,7 @@ app.get("/", (req, res) => {
 app.post("/api/v1/nodemailer", async (req, res) => {
   try {
     const { name, email, subject, description } = req.body;
+    console.log({data: req})
     let transporter = nodemailer.createTransport({
       host: "smtp.hostinger.com",
       port: 465,
